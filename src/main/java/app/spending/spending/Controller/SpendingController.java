@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import app.spending.spending.Category;
+import app.spending.spending.Entity.Category;
 import app.spending.spending.Entity.Spending;
 import app.spending.spending.Repository.SpendingRepository;
 

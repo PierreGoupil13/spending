@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.Setter;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
-import app.spending.spending.Category;
 
 @Entity
 @Getter @Setter 
@@ -22,7 +21,7 @@ public class Spending {
     private String description;
 
     private Double amount;
-    
+
     @Enumerated(EnumType.STRING)
     private Category category;
 
