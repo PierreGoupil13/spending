@@ -8,12 +8,25 @@
 <body>
 <div class="container mt-5">
     <h2>Liste des dépenses</h2>
+    <form action="#" th:action="@{/spending/sort}" th:object="${dates}" method="get">
+        <input type="date" id="startDate" name="startDate" />
+        <input type="date" id="endDate" name="endDate" />
+
+        <button type="submit" name="sortByDates">Sort</button>
+
+
+    </form>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>Nom</th>
                 <th>Description</th>
-                <th>Montant</th>
+                <th>Montant
+                    <button class="btn btn-sm btn-outline-secondary" onclick="sortTableByAmount(true)" title="Tri croissant">↑</button>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="sortTableByAmount(false)" title="Tri décroissant">↓</button>
+
+                </th>
+                <th>Date</th>
                 <th>Catégorie</th>
             </tr>
         </thead>
@@ -22,10 +35,23 @@
                 <td th:text="${spending.name}"></td>
                 <td th:text="${spending.description}"></td>
                 <td th:text="${spending.amount}"></td>
+                <td th:text="${spending.date}"></td>
                 <td th:text="${spending.category}"></td>
             </tr>
         </tbody>
     </table>
 </div>
 </body>
+<script>
+    function sortTableByAmount(asc = true) {
+        const table = document.querySelector("table");
+        const rows = Array.from(table.tBodies[0].rows);
+        rows.sort((a, b) => {
+            const valA = parseFloat(a.cells[2].textContent.replace(',', '.'));
+            const valB = parseFloat(b.cells[2].textContent.replace(',', '.'));
+            return asc ? valA - valB : valB - valA;
+        });
+        rows.forEach(row => table.tBodies[0].appendChild(row));
+    }
+</script>
 </html>

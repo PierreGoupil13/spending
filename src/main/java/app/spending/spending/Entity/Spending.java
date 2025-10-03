@@ -9,6 +9,8 @@ import lombok.Setter;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
 
+import java.time.LocalDate;
+
 @Entity
 @Getter @Setter 
 public class Spending {
@@ -21,6 +23,8 @@ public class Spending {
     private String description;
 
     private Double amount;
+
+    private LocalDate date;
 
     @Enumerated(EnumType.STRING)
     private Category category;

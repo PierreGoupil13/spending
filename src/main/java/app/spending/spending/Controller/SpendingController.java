@@ -3,15 +3,13 @@ package app.spending.spending.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import app.spending.spending.Entity.Category;
 import app.spending.spending.Entity.Spending;
 import app.spending.spending.Repository.SpendingRepository;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/spending")
@@ -35,6 +33,12 @@ public class SpendingController {
     @GetMapping("/list")
     public String showList(Model model) {
         model.addAttribute("spendings", spendingRepository.findAll());
+        return "list-spending";
+    }
+
+    @GetMapping("/sort")
+    public String sortByDates(@RequestParam LocalDate startDate, @RequestParam LocalDate endDate, Model model) {
+        model.addAttribute("spendings", spendingRepository.findByDateBetween(startDate,endDate));
         return "list-spending";
     }
 }
